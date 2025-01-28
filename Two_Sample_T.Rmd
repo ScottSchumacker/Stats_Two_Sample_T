@@ -54,6 +54,8 @@ shapiro.test(under50$under50)
 shapiro.test(above50$above50)
 ```
 
+Because our p-value is above our alpha of 0.05, we can assume that the data follows a normal distribution.
+
 Now that we know that both sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Fisher's F-Test.
 
 ***Checking for homoscedasticity***
@@ -61,3 +63,24 @@ Now that we know that both sample groups follow a normal distribution, we can ch
 var.test(under50$under50, above50$above50)
 ```
 
+Because our p-value is above our alpha of 0.05, we can assume homogeneity of variance between the two groups.
+
+Now that we know that our data is randomly sampled, follows a normal distribution, is continuous, and there is homogeneity of variance between the two groups, we can run the two sample t-test.
+
+### Statistical Analysis
+
+Before running the t-test we need to specify our hypothesis:
+H0: The difference in the means between the groups is 0 (null hypothesis)
+Ha: The difference in the means between the groups is not 0 (alternative hypothesis)
+
+We can set our alpha to 0.05 for this example. This means that we are looking for a p-value below 0.05 to reject the null hypothesis.
+
+***Student's t-test***
+```{r}
+testOut <- t.test(under50$under50, above50$above50, var.equal = TRUE)
+testOut
+```
+
+### Results
+
+Our p-value is less than 0.01 which means that we can reject our null hypothesis. We can assume that there is a statistically significant difference between the two groups in terms of blood pressure. 
