@@ -4,13 +4,25 @@ author: "Scott Schumacker"
 date: "`r Sys.Date()`"
 output: html_document
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+This project will show an example two sample t-test analyzing blood pressures from two example populations: People under 50 years of age and people above 50 years of age.
 
+***Loading Packages***
+```{r}
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+```
 
-```{r pressure, echo=FALSE}
+## Creating a data set
+
+We can start by creating two sample data sets. We can use the rnorm function to create a normal distribution around two different sample means. In this example, we can keep things simple and keep both sample groups to the same sample size of 100 people. In addition, for this example we will only be analyzing the difference in diastolic blood pressure (lower number).
+```{r cars}
+under50 <- rnorm(100, mean = 80, sd = 1)
+under50 <- as.data.frame(under50)
+above50 <- rnorm(100, mean = 90, sd = 1)
+above50 <- as.data.frame(above50)
 ```
