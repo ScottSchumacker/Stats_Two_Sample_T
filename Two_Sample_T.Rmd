@@ -26,3 +26,38 @@ under50 <- as.data.frame(under50)
 above50 <- rnorm(100, mean = 90, sd = 1)
 above50 <- as.data.frame(above50)
 ```
+
+After obtaining our data set we can visually inspect the distributions to better understand the shape of the data.
+```{r}
+P1 <- ggplot(under50, aes(x = under50)) +
+  geom_histogram(color = "black", fill = "#92C9B1") +
+  theme_classic() +
+  xlab("Diastolic Blood Pressure") +
+  ggtitle("Under 50 Years Old")
+
+P2 <- ggplot(above50, aes(x = above50)) +
+  geom_histogram(color = "black", fill = "#4F759B") +
+  theme_classic() +
+  xlab("Diastolic Blood Pressure") +
+  ggtitle("Above 50 Years Old")
+
+grid.arrange(P1, P2)
+```
+
+After visualizing the data we can see that both distributions follow a normal distribution pattern. We can confirm that both groups follow a normal distribution by testing for normality and running the Shaprio-Wilk Test.
+
+### Checking for normality and homoscedasticity
+
+***Checking for normality***
+```{r}
+shapiro.test(under50$under50)
+shapiro.test(above50$above50)
+```
+
+Now that we know that both sample groups follow a normal distribution, we can check the assumption of homogeneity of variance (homoscedasticity) before running our t-test. To test homogeneity of variance, we can run Fisher's F-Test.
+
+***Checking for homoscedasticity***
+```{r}
+var.test(under50$under50, above50$above50)
+```
+
